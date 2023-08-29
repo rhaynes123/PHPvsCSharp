@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Incident.Id" />
+            <input type="hidden" asp-for="Incident.ReportedOn" value="@DateTime.Now"/>
+            <div class="form-group">
+                <label asp-for="Incident.Address" class="control-label"></label>
+                <input asp-for="Incident.Address" class="form-control" />
+                <span asp-validation-for="Incident.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Incident.Reason" class="control-label"></label>
+                <select asp-for="Incident.Reason" class="form-control" asp-items="Html.GetEnumSelectList<PowerOutageReporter.Models.Reason>()"></select>
+                <span asp-validation-for="Incident.Reason" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-warning">Report Incident</button>
+            </div>
+        </form>
+       
+    </div>
+</div>
