@@ -2,8 +2,8 @@
 class Incident {
     public Int $Id;
     public string $Address;
-    public Reason $Reason;
-    public DateTime $ReportedOn;
+    public int $Reason;
+    public string $ReportedOn;
 }
 
 enum Reason: Int {

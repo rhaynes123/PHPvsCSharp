@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PowerOutageReporter.Data;
+using PowerOutageReporter.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,7 @@ builder.Services.AddDbContext<IncidentDbContext>((serviceProvider, optionsBuilde
     optionsBuilder.EnableSensitiveDataLogging();
 });
 builder.Services.AddRazorPages();
-
+builder.Services.AddScoped(serviceProvider => new IncidentRepository(serviceProvider.GetRequiredService<IncidentDbContext>()));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

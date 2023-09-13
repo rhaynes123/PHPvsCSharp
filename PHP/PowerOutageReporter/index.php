@@ -1,7 +1,11 @@
 <?php 
-require_once('layout.php');
+require_once('layout.html');
 require_once('models/incident.php');
-require_once('data/dbconnection.php');
+require_once('viewModels/IndexViewModel.php');
+$model = new IndexViewModel();
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    $model->OnPost();
+}
 ?>
 
 <title>Home page</title>
@@ -32,20 +36,10 @@ require_once('data/dbconnection.php');
             </div>
             
             <div class="form-group">
-                <button type="submit" class="btn btn-warning">Report Incident</button>
+                <button type="submit" class="btn btn-warning" id="btnReportIncident">Report Incident</button>
             </div>
         </form>
     </div>
 </div>
-<?php require_once('footer.php'); ?>
-<?php 
+<?php require_once('footer.html'); ?>
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $incident = new Incident();
-    $incident->Address = $_POST['Address'];
-    $incident->Reason = Reason::tryFrom($_POST['Reason']);
-    $insertSql = "INSERT INTO Incidents(Address,Reason) VALUES(?,?)";
-    $insertStatement = $db->prepare($insertSql);
-    $insertStatement->execute([$incident->Address, $incident->Reason->value]);
-}
-?>

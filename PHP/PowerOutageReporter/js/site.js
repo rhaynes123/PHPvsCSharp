@@ -3,3 +3,7 @@
 
 // Write your JavaScript code.
 
+let reportIncidentButton = document.getElementById('btnReportIncident');
+reportIncidentButton.addEventListener('click', ()=> {
+    alert("Report Created");
+});
